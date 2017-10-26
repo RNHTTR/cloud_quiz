@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Cloud Quiz</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/style/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<!-- NAVBAR -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Cloud Quiz</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Page 2</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#" data-toggle='modal' data-target='#logInModal'><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+      <li><a href="#" data-toggle='modal' data-target='#signUpModal'><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <!-- <li class=""><a href="#" data-toggle='' data-target=''><span class=" glyphicon glyphicon-option-horizontal"></span></a></li> -->
+    </ul>
+  </div>
+</nav>
+<!-- END NAVBAR -->
+
+<!-- START LOG IN -->
+<div class="modal fade" id="logInModal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Log In</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input type="email" class="form-control" id="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+          </div>
+          <div class='text-center form-group'>
+            <button type="submit" class="btn btn-default form-control">Submit</button>
+          </div>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- END LOG IN -->
+
+<!-- START SIGN UP -->
+<div class="modal fade" id="signUpModal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Sign Up</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class='form-group'>
+            <input type="" class="form-control" id="full-name" placeholder="Enter full name">
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" id="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+          </div>
+          <div class='text-center form-group'>
+            <button type="submit" class="btn btn-default form-control">Submit</button>
+          </div>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- END SIGN UP -->
+
+<!-- JUMBOTRON -->
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Welcome to Cloud Quiz</h1>
+      <p>Cloud Quiz is a cloud-based quiz application that allows you to test
+         your knowledge of cloud-based systems (currently limited to Amazon Web
+         Services). As you answer more questions correctly, your <em>Altitude
+         Score</em> will increase, but questions will become more difficult.
+         Raise your Altitude Score as high as you can before attempting to pass
+         an official certification exam provided by Amazon.</p>
+    </div>
+  </div>
+<!-- END JUMBOTRON -->
+<!-- MAIN -->
+<div class='container'>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#aws">Amazon Web Services</a></li>
+    <li><a data-toggle="tab" href="#google">Google Certified Professional</a></li>
+    <!-- <li><a data-toggle="tab" href="#soa">Society of Actuaries</a></li> -->
+  </ul>
+    <div class="tab-content">
+      <div id="aws" class="tab-pane fade in active">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="img-responsive">
+              <a href="https://aws.amazon.com/certification/our-certifications/">
+                <img src="static/images/aws_architect.png" alt="aws-architect-assc" style="width:100%">
+                <div class="caption">
+                  <p>AWS Solutions Architect - Associate</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="img-responsive">
+              <a href="https://aws.amazon.com/certification/our-certifications/">
+                <img src="static/images/aws_developer.png" alt="aws-developer-assc" style="width:100%">
+                <div class="caption">
+                  <p>AWS Developer - Associate</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="img-responsive">
+              <a href="https://aws.amazon.com/certification/our-certifications/">
+                <img src="static/images/aws_sysops.png" alt="aws-sysops-assc" style="width:100%">
+                <div class="caption">
+                  <p>AWS SysOps Administrator - Associate</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div id="google" class="tab-pane fade">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="img-responsive">
+            <a href="https://cloud.google.com/certification/cloud-architect">
+              <img src="static/images/google_architect.png" alt="google-architect" style="width:100%">
+              <div class="caption">
+                <p>Cloud Architect</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="img-responsive">
+            <a href="https://cloud.google.com/certification/data-engineer">
+              <img src="static/images/google_data_engineer.png" alt="google_data_engineer" style="width:100%">
+              <div class="caption">
+                <p>Data Engineer</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MAIN -->
+<!-- FOOTER -->
+  <!-- <div class='jumbotron footer'>
+    <footer class="container-fluid">
+      <h1>Cloud Quiz</h1>
+      <p>For freedback, please contact Ryan Hatter via email: RyanNHatter@gmail.com</p>
+    </footer>
+  </div> -->
+<footer class="footer">
+  <div class='container'>
+    <h1>Cloud Quiz</h1>
+    <p>For freedback, please contact Ryan Hatter via email: RyanNHatter@gmail.com</p>
+  </div>
+</footer>
+<!-- END FOOTER -->
+</body>
+</html>

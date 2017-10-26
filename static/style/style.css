@@ -1,0 +1,44 @@
+body { padding-top: 70px; }
+
+.caption {
+  text-align: center;
+}
+
+.footer {
+  /*text-align: center;*/
+  background-color: #f5f5f5;
+  padding-bottom: 15px;
+}
+
+.menu {
+  /*display: none;*/
+}
+
+.vertical-center {
+  min-height: 76%;
+  min-height: 76vh;
+
+  display: flex;
+  align-items: center;
+}
+
+.d-inline-block-3 {
+  display: inline-block;
+}
+
+.d-inline-block-3.quiz-question {
+  max-width: 660px;
+  padding-left: 10px;
+}
+
+.d-inline-3 {
+  display: inline;
+}
+
+.d-flex-3 {
+  display: grid;
+}
+
+.quiz-responses {
+  padding-left: 50px;
+}
