@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="static/js/main.js"></script>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
@@ -19,7 +20,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Cloud Quiz</a>
+      <a class="navbar-brand" href="index.html">Cloud Quiz</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
@@ -47,22 +48,24 @@
 <!-- MAIN -->
 <div class='vertical-center'>
   <div class='container'>
-    <h3>AWS Solutions Architect Practice Quiz</h3>
-    <p>Time Remaining: MM:SS</p>
+    <h3 id='topic'>
+      <!-- AWS Solutions Architect Practice Quiz -->
+    </h3>
+    <p>Time Remaining: <span id='timeRemaining'></span></p>
     <br>
     <div class="d-inline-block-3 text-center">
       <b>
-        XX of
+        <span id='questionNumber'></span>
         <br>
-        YY.
+        <span id='numberQuestions'></span>
       </b>
     </div>
-    <div class="d-inline-block-3 quiz-question">
-      When using a custom VPC and placing an EC2 instance in to a public subnet, it will be automatically internet accessible (ie you do not need to apply an elastic IP address or ELB to the instance).
+    <div id='question' class="d-inline-block-3 quiz-question">
+      <!-- When using a custom VPC and placing an EC2 instance in to a public subnet, it will be automatically internet accessible (ie you do not need to apply an elastic IP address or ELB to the instance). -->
     </div>
     <form class=''>
-      <div class='quiz-responses'>
-        <div class="radio">
+      <div id='answers' class='quiz-responses'>
+        <!-- <div class="radio">
           A. &nbsp;<label><input type="radio" name="optradio">Option 1</label>
         </div>
         <div class="radio">
@@ -76,7 +79,7 @@
         </div>
         <div class="radio">
           E. &nbsp;<label><input type="radio" name="optradio">Option 5</label>
-        </div>
+        </div> -->
       </div>
       <br>
       <div class="form-check">
