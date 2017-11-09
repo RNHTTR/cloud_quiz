@@ -48,9 +48,16 @@
 <!-- MAIN -->
 <div class='vertical-center'>
   <div class='container'>
-    <h3 id='topic'>
-      <!-- AWS Solutions Architect Practice Quiz -->
+    <a href="#" data-toggle='modal' data-target='#review-questions' onclick='loadReviewTable(questionData)'>
+      <span class='btn btn-warning' onclick='this.blur();'>Review Questions and Submit
+    </a>
+    <p class='mt-10'>You will be prompted again to submit your responses.</p>
+    <h3 id='topic'> <!-- NOTE: - THIS IS NOT APPROPRIATE. THIS IS A QUIZ TYPE NOT A TOPIC. TOPICS INCLUDE DYNAMODB, EC2, S3, ETC. -->
+      AWS Solutions Architect Practice Quiz
     </h3>
+    <a href="#" id='pauseButton' class="btn btn-danger pause pull-right" onclick="this.blur();">
+          <span class="glyphicon glyphicon-pause"></span> Pause
+    </a>
     <p>Time Remaining: <span id='timeRemaining'></span></p>
     <br>
     <div class="d-inline-block-3 text-center">
@@ -64,32 +71,70 @@
       <!-- When using a custom VPC and placing an EC2 instance in to a public subnet, it will be automatically internet accessible (ie you do not need to apply an elastic IP address or ELB to the instance). -->
     </div>
     <form class=''>
-      <div id='answers' class='quiz-responses'>
-        <!-- <div class="radio">
-          A. &nbsp;<label><input type="radio" name="optradio">Option 1</label>
-        </div>
-        <div class="radio">
-          B. &nbsp;<label><input type="radio" name="optradio">Option 2</label>
-        </div>
-        <div class="radio">
-          C. &nbsp;<label><input type="radio" name="optradio">Option 3</label>
-        </div>
-        <div class="radio">
-          D. &nbsp;<label><input type="radio" name="optradio">Option 4</label>
-        </div>
-        <div class="radio">
-          E. &nbsp;<label><input type="radio" name="optradio">Option 5</label>
-        </div> -->
-      </div>
+      <div id='answers' class='quiz-responses'></div>
       <br>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="">
+        <input id="mark" class="form-check-input" type="checkbox" value="" onclick='markedForReview(this);'>
         &nbsp;Mark this item for later review.
       </div>
     </form>
+    <button id='nextQuestion' type="button" class="btn btn-success pull-right next-question">Next Question</button>
   </div>
 </div>
 <!-- END MAIN -->
+
+<!-- Review and Submit Modal -->
+<div class="modal fade" id="review-questions" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Review and Submit</h2>
+      </div>
+      <div class="modal-body">
+        <!-- <h3 class="modal-title">Quiz</h3> -->
+        <br>
+        <table class="table table-hover table-responsive borderless">
+         <thead>
+           <tr>
+             <th class='text-center'>#</th>
+             <th class=''>Question</th>
+             <th class='text-center'>Answered</th>
+             <th class='text-center'>Marked for Review</th>
+           </tr>
+         </thead>
+         <tbody id='reviewTableBody'>
+           <!-- <tr>
+             <td class='text-center'>1</td>
+             <td class=''>What's the answer?</td>
+             <td class='text-center'><span class='glyphicon glyphicon-remove-circle text-danger'></span></td>
+             <td class='text-center'><span class='glyphicon glyphicon-alert text-warning'></span></td>
+            </tr>
+            <tr>
+              <td class='text-center'>2</td>
+              <td>What's the answer?</td>
+              <td class='text-center'><span class='glyphicon glyphicon-ok-sign text-success'></span></td>
+              <td class='text-center'></td>
+            </tr>
+            <tr>
+              <td class='text-center'>3</td>
+              <td>What's the answer to question 1?</td>
+              <td class='text-center'><span class='glyphicon glyphicon-ok-sign text-success'></span></td>
+              <td class='text-center'><span class='glyphicon glyphicon-alert text-warning'></span></td>
+            </tr> -->
+          </tbody>
+        </table>
+          <br>
+          <div class='form-group' onclick='submitQuiz()'>
+            <!-- <a href="results.html" type="submit" class="btn btn-default form-control">Submit</a> -->
+            <a href="#" type="" class="btn btn-default form-control">Submit</a>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Review and Submit Modal -->
 
 <!-- FOOTER -->
     <footer class="footer">

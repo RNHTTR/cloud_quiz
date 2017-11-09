@@ -1,5 +1,13 @@
 body { padding-top: 70px; }
 
+.dashboard {
+  padding-top: 0;
+}
+
+.dashboard-jumbotron {
+  padding-top: 70px;
+}
+
 .caption {
   text-align: center;
 }
@@ -41,4 +49,49 @@ body { padding-top: 70px; }
 
 .quiz-responses {
   padding-left: 50px;
+}
+
+.next-question {
+  /*padding: 100px;*/
+  /*margin: 50px;*/
+}
+
+.pause {
+  /*padding-right: 150px;*/
+  /*margin: 50px;*/
+}
+
+.glyphicon.glyphicon-fire {
+    font-size: 200px;
+    color: orange;
+}
+
+.glyphicon.glyphicon-signal {
+    font-size: 200px;
+    color: green;
+    /*display: block;*/
+}
+
+.hiddenRow {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.borderless td {
+    /*border: none !important;*/
+    /*border-width: 1px !important;*/
+    border-color: #f1f1f1 !important;
+}
+
+.result  {
+  /*text-align: center;*/
+  margin-left: 15px;
+}
+
+.clickable-hover {
+  cursor: pointer;
 }
