@@ -67,29 +67,29 @@ function pauseTimer(display) {
   clearInterval(countdown);
 }
 
-function setAnswer(element, num) {
+function setAnswer(element, num, fromReviewFlag=false) {
 
-  // console.log(element.textContent);
-  // console.log(element);
-  // console.log(element.find('input')[0].id);
-  questionData[num - 1]['answerId'] = '#' + element.innerHTML.slice(11,18);
-  currentAnswer   = element.textContent;
-  console.log(questionData);
+  if (fromReviewFlag) {
+    currentAnswer = element[0].nextSibling.nodeValue;
+  } else {
+    questionData[num - 1]['answerId'] = '#' + element.innerHTML.slice(11,18);
+    currentAnswer = element.textContent;
+  }
+
 }
 
 function updateQuestion(data, num) {
-  const index            = num - 1;
   // const topic            = data[index]['Topic'];
-  correctAnswers         = data[index]['correct_answers'];
-  const question         = data[index]['question'];
-  incorrectAnswers       = data[index]['incorrect_answers'];
+  const index      = num - 1;
+  correctAnswers   = data[index]['correct_answers'];
+  const question   = data[index]['question'];
+  incorrectAnswers = data[index]['incorrect_answers'];
   // const answers          = shuffle(correctAnswers.concat(incorrectAnswers));
 
   var answers;
   if ('answers' in data[index]) {
     answers = data[index]['answers'];
   } else {
-    console.log('hey ther');
     answers = shuffle(correctAnswers.concat(incorrectAnswers));
     data[index]['answers'] = answers;
   }
@@ -105,11 +105,16 @@ function updateQuestion(data, num) {
     var id     = 'answer' + letter;
     // var answer = '<div class="radio">' + letter + '. &nbsp;<label id="' + id + '" onclick="setAnswer(this, ' + num + ')"><input type="radio" name="optradio">' + item + '</label></div>';
     var answer = '<div class="radio">' + letter + '. &nbsp;<label onclick="setAnswer(this, ' + num + ')"><input id="' + id + '" type="radio" name="optradio">' + item + '</label></div>';
+    // var answer = '<div class="radio">' + letter + '. &nbsp;<label onclick="setAnswer(this, ' + num + ')"><input id="' + id + '" type="radio" name="optradio">' + item + '</input></label></div>';
     $('#answers').append(answer);
   };
 
   const questionNumberText = num.toString()+' of';
   $("#questionNumber").text(questionNumberText);
+
+  var answerId = questionData[num - 1]['answerId'];
+
+  $(answerId).prop('checked', true);
 
   questionNumber += 1;
 
@@ -124,14 +129,11 @@ $(document).ready(function() {
     else if (correctAnswers.includes(currentAnswer)) {
       selectedCorrect.push(questionData[questionNumber - 2]);
       currentAnswer = undefined;
-      // currentAnswerId = undefined;
-      // console.log(questionData[questionNumber - 2]);
-      // console.log(questionNumber);
     } else if (incorrectAnswers.includes(currentAnswer)) {
       selectedIncorrect.push(questionData[questionNumber - 2]);
       currentAnswer = undefined;
       // currentAnswerId = undefined;
-      // console.log(selectedCorrect);
+
     }
 
     if (questionData.length > questionNumber) {
@@ -152,30 +154,9 @@ $(document).ready(function() {
     $("#mark").prop("checked", false);
     marked = false
 
-  });
-});
+    console.log('correct: \n' + selectedCorrect.length);
+    console.log('incorrect: \n' + selectedIncorrect.length);
 
-$(document).ready(function() {
-  $('#pauseButton').click(function() {
-    if ( $( this ).hasClass( "btn-danger" ) ) {
-      display = $('#timeRemaining');
-      pauseTimer(display);
-      $( this ).removeClass("btn-danger");
-      $( this ).addClass("btn-success");
-      $( this ).html('<span class="glyphicon glyphicon-play"></span> Resume');
-    } else {
-      var timeString = $('#timeRemaining').text().split(':');
-      var min = timeString[0];
-      var sec = timeString[1];
-      sec = parseInt(sec, 10) + (parseInt(min, 10) * 60) - 1;
-      jQuery(function ($) {
-        display = $('#timeRemaining');
-        startTimer(sec, display);
-      });
-      $( this ).removeClass("btn-success");
-      $( this ).addClass("btn-danger");
-      $( this ).html('<span class="glyphicon glyphicon-pause"></span> Pause');
-    }
   });
 });
 
@@ -217,9 +198,23 @@ function loadQuestionFromReview(num) {
     $('#nextQuestion').addClass('disabled');
   }
 
-  var answerId = questionData[num - 1]['answerId'];
+  var answer;
 
-  $(answerId).prop('checked', true);
+  if ('answerId' in questionData[num - 1]) {
+    const answerId = questionData[num - 1]['answerId'];
+    answer = $(answerId);
+    setAnswer(answer, num - 1, true);
+  }
+
+  if (selectedCorrect.includes(questionData[num - 1])) {
+    console.log('correct included!');
+    const index = selectedCorrect.indexOf(questionData[num - 1]);
+    selectedCorrect.splice(index, 1);
+  } else if (selectedIncorrect.includes(questionData[num - 1])) {
+    console.log('incorrect included!')
+    const index = selectedIncorrect.indexOf(questionData[num - 1]);
+    selectedIncorrect.splice(index, 1);
+  }
 
   $('#review-questions').modal('toggle');
   questionNumber = num + 1;
@@ -235,6 +230,34 @@ function submitQuiz() {
   // alert(selectedCorrect);
 
 }
+
+$(document).ready(function() {
+  $('#pauseButton').click(function() {
+    if ( $( this ).hasClass( "btn-danger" ) ) {
+      display = $('#timeRemaining');
+      pauseTimer(display);
+      $( this ).removeClass("btn-danger");
+      $( this ).addClass("btn-success");
+      $( this ).html('<span class="glyphicon glyphicon-play"></span> Resume');
+      $('#nextQuestion').addClass("disabled");
+      $('#reviewAndSubmitBtn').addClass("disabled");
+    } else {
+      var timeString = $('#timeRemaining').text().split(':');
+      var min = timeString[0];
+      var sec = timeString[1];
+      sec = parseInt(sec, 10) + (parseInt(min, 10) * 60) - 1;
+      jQuery(function ($) {
+        display = $('#timeRemaining');
+        startTimer(sec, display);
+      });
+      $( this ).removeClass("btn-success");
+      $( this ).addClass("btn-danger");
+      $( this ).html('<span class="glyphicon glyphicon-pause"></span> Pause');
+      $('#nextQuestion').removeClass("disabled");
+      $('#reviewAndSubmitBtn').removeClass("disabled");
+    }
+  });
+});
 
 $(document).ready( function() {
 
