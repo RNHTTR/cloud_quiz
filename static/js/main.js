@@ -5,6 +5,7 @@ var selectedCorrect    = [];
 var selectedIncorrect  = [];
 var skipped            = [];
 var currentAnswer;
+// var currentAnswerId;
 var marked;
 
 
@@ -67,7 +68,13 @@ function pauseTimer(display) {
 }
 
 function setAnswer(element, num) {
-  currentAnswer = element.textContent;
+
+  // console.log(element.textContent);
+  // console.log(element);
+  // console.log(element.find('input')[0].id);
+  questionData[num - 1]['answerId'] = '#' + element.innerHTML.slice(11,18);
+  currentAnswer   = element.textContent;
+  console.log(questionData);
 }
 
 function updateQuestion(data, num) {
@@ -96,8 +103,8 @@ function updateQuestion(data, num) {
     var item   = answers[i];
     var letter = letters[i];
     var id     = 'answer' + letter;
-    var answer = '<div class="radio">' + letter + '. &nbsp;<label id="' + id + '" onclick="setAnswer(this, ' + num + ')"><input id="input-' + id + '" type="radio" name="optradio">' + item + '</label></div>';
-    // var answer = '<div class="radio">' + letter + '. &nbsp;<label onclick="setAnswer(this, ' + num + ')"><input id="' + id + '" type="radio" name="optradio">' + item + '</label></div>';
+    // var answer = '<div class="radio">' + letter + '. &nbsp;<label id="' + id + '" onclick="setAnswer(this, ' + num + ')"><input type="radio" name="optradio">' + item + '</label></div>';
+    var answer = '<div class="radio">' + letter + '. &nbsp;<label onclick="setAnswer(this, ' + num + ')"><input id="' + id + '" type="radio" name="optradio">' + item + '</label></div>';
     $('#answers').append(answer);
   };
 
@@ -117,11 +124,13 @@ $(document).ready(function() {
     else if (correctAnswers.includes(currentAnswer)) {
       selectedCorrect.push(questionData[questionNumber - 2]);
       currentAnswer = undefined;
+      // currentAnswerId = undefined;
       // console.log(questionData[questionNumber - 2]);
       // console.log(questionNumber);
     } else if (incorrectAnswers.includes(currentAnswer)) {
       selectedIncorrect.push(questionData[questionNumber - 2]);
       currentAnswer = undefined;
+      // currentAnswerId = undefined;
       // console.log(selectedCorrect);
     }
 
@@ -207,6 +216,10 @@ function loadQuestionFromReview(num) {
   } else {
     $('#nextQuestion').addClass('disabled');
   }
+
+  var answerId = questionData[num - 1]['answerId'];
+
+  $(answerId).prop('checked', true);
 
   $('#review-questions').modal('toggle');
   questionNumber = num + 1;
