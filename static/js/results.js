@@ -42,6 +42,7 @@ function loadResultsTable(data) {
     var id = "'#triangle" + i + "'";
 
     var entry = '<tr data-toggle="collapse" data-target="#accordion' + i + '" class="accordion-toggle" onclick="rotate90(' + id + ')">\
+                   <td class="text-center">' + qNo + '</td>\
                    <td>Placeholder Topic</td>\
                    <td>' + question + '</td>\
                    <td>' + 'Placeholder Your Answer'  + '</td>\
