@@ -66,6 +66,26 @@ body { padding-top: 70px; }
     color: orange;
 }
 
+#glyph {
+  font-size: 200px;
+}
+
+.orange-glyph {
+  color: orange;
+}
+
+.green-glyph {
+  color: green;
+}
+
+.red-glyph {
+  color: #00ff00;
+}
+
+.yellow-glyph {
+  color: yellow;
+}
+
 .glyphicon.glyphicon-signal {
     font-size: 200px;
     color: green;
@@ -92,6 +112,22 @@ body { padding-top: 70px; }
   margin-left: 15px;
 }
 
+.mr-10 {
+  margin-right: 10px !important;
+}
+
 .clickable-hover {
   cursor: pointer;
+}
+
+.point-left {
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.point-down {
+  -ms-transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
 }

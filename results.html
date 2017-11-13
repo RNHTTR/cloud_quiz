@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="static/style/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="static/js/results.js"></script>
 </head>
 <body>
 
@@ -43,9 +44,12 @@
 <!-- JUMBOTRON -->
   <div class="container">
     <div class="jumbotron">
-      <h1 class="glyphicon glyphicon-fire pull-right"></h1>
-      <h3>Good job!</h3>
-      <h1>80%</h1>
+      <!-- <h1 class="glyphicon glyphicon-fire pull-right"></h1> -->
+      <!-- <div class='red'> -->
+        <h1 id='glyph' class="pull-right"></h1>
+      <!-- </div> -->
+      <h3 id='header'>Good job!</h3>
+      <h1 id='score'>80%</h1>
       <p>Continue to strive for at least 70% on level 5 exams. You should feel confident
          that you've passed if you achieve 70% correct. Don't stop now though!</p>
       <br>
@@ -99,8 +103,8 @@
         <th></th>
       </tr>
     </thead>
-    <tbody>
-      <tr data-toggle="collapse" data-target="#accordion1" class="accordion-toggle">
+    <tbody id='resultsTableBody'>
+      <!-- <tr data-toggle="collapse" data-target="#accordion1" class="accordion-toggle">
         <td>DynamoDB</td>
         <td>How do you get a bunch of data from DDB?</td>
         <td>BatchGetItems</td>
@@ -147,7 +151,7 @@
               or, i suppose, at least i really really really hope so!!</p>
           </div>
         </td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>

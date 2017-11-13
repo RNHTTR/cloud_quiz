@@ -123,6 +123,14 @@ function updateQuestion(data, num) {
 $(document).ready(function() {
   $('#nextQuestion').click(function() {
 
+    if (selectedCorrect.includes(questionData[questionNumber - 2])) {
+      const index = selectedCorrect.indexOf(questionData[questionNumber - 2]);
+      selectedCorrect.splice(index, 1);
+    } else if (selectedIncorrect.includes(questionData[questionNumber - 2])) {
+      const index = selectedIncorrect.indexOf(questionData[questionNumber - 2]);
+      selectedIncorrect.splice(index, 1);
+    }
+
     if (currentAnswer === undefined) {
       skipped.push(questionData[questionNumber - 2]);
     }
@@ -132,8 +140,6 @@ $(document).ready(function() {
     } else if (incorrectAnswers.includes(currentAnswer)) {
       selectedIncorrect.push(questionData[questionNumber - 2]);
       currentAnswer = undefined;
-      // currentAnswerId = undefined;
-
     }
 
     if (questionData.length > questionNumber) {
@@ -144,7 +150,6 @@ $(document).ready(function() {
         questionData[questionNumber - 3]['marked'] = false;
       }
     } else if (questionData.length === questionNumber) {
-      // $('#nextQuestion').text('Review Questions');
       $('#nextQuestion').addClass('disabled');
       updateQuestion(questionData, questionNumber);
     } else {
@@ -153,9 +158,6 @@ $(document).ready(function() {
 
     $("#mark").prop("checked", false);
     marked = false
-
-    console.log('correct: \n' + selectedCorrect.length);
-    console.log('incorrect: \n' + selectedIncorrect.length);
 
   });
 });
@@ -167,13 +169,13 @@ function markedForReview(cb) {
 
 function loadReviewTable(data) {
   $("#reviewTableBody").empty();
-  for(var i = 0; i < data.length; i++) {
+  for (var i = 0; i < data.length; i++) {
     var item     = data[i];
-    var qNo      = i + 1;
     var question = item.question;
     var markedQ  = item.marked;
+    var qNo      = i + 1;
 
-    if (selectedCorrect.includes(item) || selectedIncorrect.includes(item)) {
+    if (item['answerId']) {
       var glyph = '"glyphicon glyphicon-ok-sign text-success"'
     } else {
       var glyph = '"glyphicon glyphicon-remove-circle text-danger"'
@@ -191,7 +193,36 @@ function loadReviewTable(data) {
 }
 
 function loadQuestionFromReview(num) {
-  updateQuestion(questionData, num);
+
+  if (currentAnswer === undefined) {
+    skipped.push(questionData[num]);
+  }
+  else if (correctAnswers.includes(currentAnswer)) {
+    selectedCorrect.push(questionData[num]);
+    currentAnswer = undefined;
+  } else if (incorrectAnswers.includes(currentAnswer)) {
+    selectedIncorrect.push(questionData[num]);
+    currentAnswer = undefined;
+  }
+
+  if (questionData.length > num) {
+    updateQuestion(questionData, num);
+    if (marked) {
+      questionData[num]['marked'] = true;
+    } else {
+      questionData[num]['marked'] = false;
+    }
+  } else if (questionData.length === num) {
+    // $('#nextQuestion').text('Review Questions');
+    $('#nextQuestion').addClass('disabled');
+    updateQuestion(questionData, num);
+  } else {
+    alert('Here are the questions...');
+  }
+
+  $("#mark").prop("checked", false);
+  marked = false
+
   if (num !== questionData.length) {
     $('#nextQuestion').removeClass('disabled');
   } else {
@@ -207,11 +238,9 @@ function loadQuestionFromReview(num) {
   }
 
   if (selectedCorrect.includes(questionData[num - 1])) {
-    console.log('correct included!');
     const index = selectedCorrect.indexOf(questionData[num - 1]);
     selectedCorrect.splice(index, 1);
   } else if (selectedIncorrect.includes(questionData[num - 1])) {
-    console.log('incorrect included!')
     const index = selectedIncorrect.indexOf(questionData[num - 1]);
     selectedIncorrect.splice(index, 1);
   }
@@ -221,8 +250,13 @@ function loadQuestionFromReview(num) {
 }
 
 function submitQuiz() {
+  localStorage.setItem('correct', JSON.stringify(selectedCorrect));
+  localStorage.setItem('incorrect', JSON.stringify(selectedIncorrect));
+  localStorage.setItem('skipped', JSON.stringify(skipped));
+  localStorage.setItem('questionData', JSON.stringify(questionData));
   for (q in selectedCorrect) {
     console.log('correct: ' + selectedCorrect[q].question);
+    // localStorage.setItem('correct', JSON.stringify(selectedCorrect));
   }
   for (q in selectedIncorrect) {
     console.log('incorrect: ' + selectedIncorrect[q].question);
@@ -287,7 +321,7 @@ $(document).ready( function() {
 
 
       // NOTE: - TESTING WITHOUT MAKING REQUESTS TO API GATEWAY
-       questionData = [{"question":"What's the answer to question 1?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me!","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to question 2?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me!","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to 3?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me!"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]},{"question":"What's the answer to 4?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me!"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]},{"question":"What's the answer to question 5?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me!","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to 6?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me!"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]},{"question":"What's the answer to question 7?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me!","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to question 8?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me!","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to question 9?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me!","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to 10?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me!"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]}]
+       questionData = [{"question":"What's the answer to question 1?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 1","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to question 2?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 2","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to 3?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 3"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]},{"question":"What's the answer to 4?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 4"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]},{"question":"What's the answer to question 5?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 5","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to 6?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 6"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]},{"question":"What's the answer to question 7?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 7","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to question 8?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 8","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to question 9?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me!9","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to 10?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 10"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]}]
 
       updateQuestion(questionData, num=1);
 
