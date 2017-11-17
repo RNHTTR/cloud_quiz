@@ -218,10 +218,10 @@
           <div class='form-group'>
             <select class="form-control" name='duration'>
               <option value="60">60 Seconds</option>
-              <option value="65">65 Seconds</option>
-              <option value="73" selected>Time per question (Default 73 seconds)</option>
-              <option value="80">80 Seconds</option>
-              <option value="85">85 Seconds</option>
+              <option value="70">70 Seconds</option>
+              <option value="80" selected>Time per question (Default 80 seconds)</option>
+              <option value="90">90 Seconds</option>
+              <option value="100">100 Seconds</option>
             </select>
           </div>
           <h5>Select Topics</h5>
@@ -264,38 +264,40 @@
         <h3 class="modal-title">Practice Exam</h3>
         <p>Practice exams consist of 60 questions to be answered in 80 minutes.</p>
         <!-- <br> -->
-        <form>
+        <form action='quiz.html' method='GET'>
           <h5>Select Topics</h5>
+          <input type="hidden" name="duration" value="80" />
+          <input type="hidden" name="numQ" value="60" />
           <div class='row'>
             <div class='col-md-4'>
               <div class="checkbox">
-                <label><input checked type="checkbox" value="">Object Storage</label>
+                <label><input checked type="checkbox" value="true" name="object-storage">Object Storage</label>
               </div>
               <div class="checkbox">
-                <label><input checked type="checkbox" value="">EC2</label>
-              </div>
-            </div>
-            <div class='col-md-4'>
-              <div class="checkbox">
-                <label><input checked type="checkbox" value="">Route 53</label>
-              </div>
-              <div class="checkbox">
-                <label><input checked type="checkbox" value="">Databases</label>
+                <label><input checked type="checkbox" value="true" name='ec2'>EC2</label>
               </div>
             </div>
             <div class='col-md-4'>
               <div class="checkbox">
-                <label><input checked type="checkbox" value="">VPC</label>
+                <label><input checked type="checkbox" value="true" name='route53'>Route 53</label>
               </div>
               <div class="checkbox">
-                <label><input checked type="checkbox" value="">Application Services</label>
+                <label><input checked type="checkbox" value="true" name='databases'>Databases</label>
+              </div>
+            </div>
+            <div class='col-md-4'>
+              <div class="checkbox">
+                <label><input checked type="checkbox" value="true" name='vpc'>VPC</label>
+              </div>
+              <div class="checkbox">
+                <label><input checked type="checkbox" value="true" name='application-services'>Application Services</label>
               </div>
             </div>
           </div>
           <br>
           <div class='form-group'>
-            <!-- <button type="submit" class="btn btn-default form-control">Begin Exam</button> -->
-            <a class="btn btn-default form-control" href='quiz.html'>Begin Exam</a>
+            <button type="submit" class="btn btn-default form-control">Begin Exam</button>
+            <!-- <a class="btn btn-default form-control" href='quiz.html'>Begin Exam</a> -->
           </div>
         </form>
       </div>
