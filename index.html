@@ -33,7 +33,7 @@
         </ul>
       </li>
       <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
+      <li><a href="#" onclick="getCurrentUser()">Page 3</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#" data-toggle='modal' data-target='#logInModal'><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
@@ -56,16 +56,16 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <input type="email" class="form-control" id="email" placeholder="Enter email">
+            <input type="email" class="form-control" id="logInEmail" placeholder="Enter email">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+            <input type="password" class="form-control" id="logInPassword" placeholder="Enter password">
           </div>
           <div class="checkbox">
             <label><input type="checkbox"> Remember me</label>
           </div>
           <div class='text-center form-group'>
-            <button type="submit" class="btn btn-default form-control">Submit</button>
+            <button type="" class="btn btn-default form-control" data-dismiss="modal" onclick="return logIn()">Submit</button>
           </div>
         </form>
       </div>
@@ -87,22 +87,23 @@
         <h4 class="modal-title">Sign Up</h4>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="signUpForm">
           <div class='form-group'>
             <input type="" class="form-control" id="full-name" placeholder="Enter full name">
           </div>
           <div class="form-group">
-            <input type="email" class="form-control" id="email" placeholder="Enter email">
+            <input type="email" class="form-control" id="signUpEmail" placeholder="Enter email">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+            <input type="password" class="form-control" id="signUpPassword" placeholder="Enter password">
           </div>
           <div class="checkbox">
             <label><input type="checkbox"> Remember me</label>
           </div>
           <div class='text-center form-group'>
-            <button type="submit" class="btn btn-default form-control">Submit</button>
+            <button type="" class="btn btn-default form-control" data-dismiss="modal" onclick="return signUp()">Submit</button>
           </div>
+          <!-- <input type="submit" class="btn btn-default form-control" value="Submit" onclick="signUp()" /> -->
         </form>
       </div>
       <!-- <div class="modal-footer">
