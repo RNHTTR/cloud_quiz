@@ -66,6 +66,11 @@ body { padding-top: 70px; }
     color: orange;
 }
 
+#altscore {
+  font-size: 200px;
+  color: green;
+}
+
 #glyph {
   font-size: 200px;
 }
@@ -101,6 +106,10 @@ body { padding-top: 70px; }
   margin-top: 10px !important;
 }
 
+.mr-10 {
+  margin-right: 10px !important;
+}
+
 .borderless td {
     /*border: none !important;*/
     /*border-width: 1px !important;*/
@@ -110,10 +119,6 @@ body { padding-top: 70px; }
 .result  {
   /*text-align: center;*/
   margin-left: 15px;
-}
-
-.mr-10 {
-  margin-right: 10px !important;
 }
 
 .clickable-hover {

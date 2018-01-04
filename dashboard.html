@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="static/style/simple-sidebar.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="static/js/dashboard.js"></script>
 </head>
 
 <body class='dashboard'>
@@ -20,20 +21,19 @@
     </div>
     <ul class="nav navbar-nav">
       <!-- <li class="active"><a href="#">Home</a></li> -->
-      <li class=""><a href="#">Home</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+      <li class=""><a href="index.html">Home</a></li>
+      <li class=""><a href="dashboard.html">Dashboard</a></li>
+      <!-- <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dashboard
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
+          <li><a href="dashboard.html">Results</a></li>
+          <li><a href="index.html">Create a Quiz</a></li>
+          <li><a href="dashboard.html">Ask</a></li>
         </ul>
-      </li>
-      <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
+      </li> -->
     </ul>
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right mr-10">
       <!-- <li><a href="#" data-toggle='modal' data-target='#logInModal'><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
       <li><a href="#" data-toggle='modal' data-target='#signUpModal'><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
       <li class=""><a href="#" data-toggle='' data-target=''><span class=" glyphicon glyphicon-option-horizontal"></span></a></li>
@@ -85,11 +85,12 @@ $("#menu-toggle").click(function(e) {
   <div class="container dashboard-jumbotron">
     <div class="jumbotron">
       <h1>Dashboard</h1>
-      <p>View your progress here. Increase your Altitude Score. Do big things
-         Lorem ipsum!!!As you answer more questions correctly, your <em>Altitude
+      <p>View your progress here. Increase your Altitude Score.
+         As you answer more questions correctly, your <em>Altitude
          Score</em> will increase, but questions will become more difficult.
          Raise your Altitude Score as high as you can before attempting to pass
-         an official certification exam provided by Amazon.</p>
+         an official certification exam provided by Amazon Web Services or
+         Google Cloud Platform.</p>
     </div>
   </div>
 <!-- END JUMBOTRON -->
@@ -97,7 +98,67 @@ $("#menu-toggle").click(function(e) {
 <!-- MAIN -->
 <div class='container text-center'>
   <h1>Altitude Score</h1>
-  <h1 class='glyphicon glyphicon-signal'> 4.2</h1>
+  <h1 id='altscore'>4.2</h1>
+</div>
+<br>
+<br>
+<div class="modal fade" id="quizResultsModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div  class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Quiz date - Quiz details</h2>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover table-responsive borderless">
+          <thead>
+            <tr>
+              <th class='text-center'>#</th>
+              <th>Topic</th>
+              <th>Question</th>
+              <th>Your Answer</th>
+              <th>Correct Answer</th>
+              <th>Correct</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="historicQuizTable">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='container text-center'>
+  <h1 id="historyH1">Quiz History</h1>
+  <table id='historyTable' class="table table-hover table-responsive borderless">
+   <thead>
+     <tr>
+       <th class='text-center'>Date</th>
+       <th class='text-center'>Correct</th>
+       <th class='text-center'>Questions</th>
+       <th class='text-center'>% Correct</th>
+       <th class='text-center'>Score Change</th>
+     </tr>
+   </thead>
+   <tbody id='historyTableBody'>
+     <tr class='text-center'>
+       <!-- <td>12/25/2017</td>
+       <td>10</td>
+       <td>10</td>
+       <td>100</td>
+       <td>+2</td>
+     </tr>
+     <tr class='text-center'>
+       <td>12/26/2017</td>
+       <td>40</td>
+       <td>80</td>
+       <td>50</td>
+       <td>-1</td>
+     </tr> -->
+   </tbody>
+  </table>
 </div>
 <!-- END MAIN -->
 

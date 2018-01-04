@@ -19,20 +19,20 @@
       <a class="navbar-brand" href="index.html">Cloud Quiz</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="index.html">Home</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+      <!-- <li class="active"><a href="#">Home</a></li> -->
+      <li class=""><a href="index.html">Home</a></li>
+      <li class=""><a href="dashboard.html">Dashboard</a></li>
+      <!-- <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dashboard
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
+          <li><a href="dashboard.html">Results</a></li>
+          <li><a href="index.html">Create a Quiz</a></li>
+          <li><a href="dashboard.html">Ask</a></li>
         </ul>
-      </li>
-      <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
+      </li> -->
     </ul>
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right mr-10">
       <!-- <li><a href="#" data-toggle='modal' data-target='#logInModal'><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
       <li><a href="#" data-toggle='modal' data-target='#signUpModal'><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
       <li class=""><a href="#" data-toggle='' data-target=''><span class=" glyphicon glyphicon-option-horizontal"></span></a></li>
@@ -63,26 +63,8 @@
            <th class='text-center'>%</th>
          </tr>
        </thead>
-       <tbody>
-         <tr>
-           <td>Databases</td>
-           <td class='text-center'>0</td>
-           <td class='text-center'>1</td>
-           <td class='text-center'>0</td>
-          </tr>
-          <tr>
-            <td>Storage</td>
-            <td class='text-center'>2</td>
-            <td class='text-center'>2</td>
-            <td class='text-center'>100</td>
-          </tr>
-          <tr>
-            <td>EC2</td>
-            <td class='text-center'>2</td>
-            <td class='text-center'>2</td>
-            <td class='text-center'>100</td>
-          </tr>
-        </tbody>
+       <tbody id='summaryTableBody'>
+       </tbody>
       </table>
     </div>
   </div>
@@ -105,54 +87,6 @@
       </tr>
     </thead>
     <tbody id='resultsTableBody'>
-      <!-- <tr data-toggle="collapse" data-target="#accordion1" class="accordion-toggle">
-        <td>DynamoDB</td>
-        <td>How do you get a bunch of data from DDB?</td>
-        <td>BatchGetItems</td>
-        <td>BatchGetItem</td>
-        <td><span class='glyphicon glyphicon-remove-circle text-danger result'> </span></td>
-        <td><span class='glyphicon glyphicon-triangle-left'></span></td>
-      </tr>
-      <tr>
-        <td colspan='6' class='hiddenRow'>
-          <div id='accordion1' class='accordian-body collapse'>
-            </p>Lorem ipsum this is a helpful solution for qustion 1! You know dis!! lorem ipsum lorem ipsum</p>
-          </div>
-        </td>
-      </tr>
-      <tr data-toggle="collapse" data-target="#accordion2" class="accordion-toggle">
-        <td>S3</td>
-        <td>What's the smallest size file you can store in S3?</td>
-        <td>0 Bytes</td>
-        <td>0 Bytes</td>
-        <td><span class='glyphicon glyphicon-ok-sign text-success result'></span></td>
-        <td><span class='glyphicon glyphicon-triangle-left'></span></td>
-      </tr>
-      <tr>
-        <td colspan='6' class='hiddenRow'>
-          <div id='accordion2' class='accordian-body collapse'>
-          </p>Lorem ipsum this is a helpful solution for qustion 2! You know dis!! lorem ipsum lorem ipsum
-              or, i suppose, at least i really really really hope so!! just filling a bunch a bunc ha bunch]
-              a bunch a bunch of space!!!!!!!!!!!!!!</p>
-          </div>
-        </td>
-      </tr>
-      <tr data-toggle="collapse" data-target="#accordion3" class="accordion-toggle">
-        <td>EC2</td>
-        <td>What does EC2 stand for?</td>
-        <td>Elastic Compute Cloud</td>
-        <td>Elastic Compute Cloud</td>
-        <td><span class='glyphicon glyphicon-ok-sign text-success result'></span></td>
-        <td><span class='glyphicon glyphicon-triangle-left'></span></td>
-      </tr>
-      <tr>
-        <td colspan='6' class='hiddenRow'>
-          <div id='accordion3' class='accordian-body collapse'>
-          </p>Lorem ipsum this is a helpful solution for qustion 3! You know dis!! lorem ipsum lorem ipsum
-              or, i suppose, at least i really really really hope so!!</p>
-          </div>
-        </td>
-      </tr> -->
     </tbody>
   </table>
 </div>

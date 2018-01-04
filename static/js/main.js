@@ -136,11 +136,16 @@ $(document).ready(function() {
     }
     else if (correctAnswers.includes(currentAnswer)) {
       selectedCorrect.push(questionData[questionNumber - 2]);
+      selectedCorrect[selectedCorrect.length - 1]['selected_answer'] = currentAnswer;
       currentAnswer = undefined;
     } else if (incorrectAnswers.includes(currentAnswer)) {
       selectedIncorrect.push(questionData[questionNumber - 2]);
+      selectedIncorrect[selectedIncorrect.length - 1]['selected_answer'] = currentAnswer;
       currentAnswer = undefined;
     }
+
+    console.log(selectedCorrect);
+    console.log(selectedIncorrect);
 
     if (questionData.length > questionNumber) {
       updateQuestion(questionData, questionNumber);
@@ -206,6 +211,7 @@ function loadQuestionFromReview(num) {
   }
 
   if (questionData.length > num) {
+
     updateQuestion(questionData, num);
     if (marked) {
       questionData[num]['marked'] = true;
@@ -215,6 +221,7 @@ function loadQuestionFromReview(num) {
   } else if (questionData.length === num) {
     // $('#nextQuestion').text('Review Questions');
     $('#nextQuestion').addClass('disabled');
+
     updateQuestion(questionData, num);
   } else {
     alert('Here are the questions...');
@@ -311,6 +318,7 @@ $(document).ready( function() {
     type: 'GET',
     // url: "https://2yroiqqvf8.execute-api.us-east-1.amazonaws.com/prod/ServeQuestion",
     data: queryStringParameters,
+    dataType: 'json',
     error: function(xhr, status, error) {
       // TODO: - HANDLE ERRORS
       console.log(xhr)
@@ -321,7 +329,7 @@ $(document).ready( function() {
 
 
       // NOTE: - TESTING WITHOUT MAKING REQUESTS TO API GATEWAY
-       questionData = [{"question":"What's the answer to question 1?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 1","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to question 2?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 2","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to 3?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 3"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]},{"question":"What's the answer to 4?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 4"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]},{"question":"What's the answer to question 5?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 5","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to 6?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 6"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]},{"question":"What's the answer to question 7?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 7","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to question 8?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 8","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to question 9?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me!9","Also correct! Pick me too! :)"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."]},{"question":"What's the answer to 10?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 10"],"Topic":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"]}]
+       questionData = [{"question":"What's the answer to question 1?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 1","Also correct! Pick me too! :)"],"subject":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."], "topic":"Databases"},{"question":"What's the answer to question 2?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 2","Also correct! Pick me too! :)"],"subject":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."], "topic":"Databases"},{"question":"What's the answer to 3?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 3"],"subject":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"], "topic":"EC2"},{"question":"What's the answer to 4?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 4"],"subject":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"], "topic":"EC2"},{"question":"What's the answer to question 5?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 5","Also correct! Pick me too! :)"],"subject":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."], "topic":"IAM"},{"question":"What's the answer to 6?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 6"],"subject":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"], "topic":"Databases"},{"question":"What's the answer to question 7?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 7","Also correct! Pick me too! :)"],"subject":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."], "topic":"VPC"},{"question":"What's the answer to question 8?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me! 8","Also correct! Pick me too! :)"],"subject":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."], "topic":"VPC"},{"question":"What's the answer to question 9?","QuestionId":1,"difficulty":0,"correct_answers":["Correct! Pick me!9","Also correct! Pick me too! :)"],"subject":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect..."], "topic":"Security"},{"question":"What's the answer to 10?","QuestionId":0,"difficulty":0,"correct_answers":["Correct! Pick me! 10"],"subject":"AWS Solutions Architect Practice Quiz","incorrect_answers":["Incorrect. Don't pick me..","Also incorrect.","Still incorrect...","incorrect too!"], "topic":"Storage"}]
 
       updateQuestion(questionData, num=1);
 
@@ -338,7 +346,7 @@ $(document).ready( function() {
 
     },
     success: function(result){
-
+      console.log(result);
       updateQuestion(result, num=1)
 
       questionData = result

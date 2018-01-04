@@ -4,6 +4,8 @@ var incorrect;
 var skipped;
 var rotated = false;
 
+// TODO: - Get logged in userid and pass it with questionData
+
 function rotate90(id) {
   const element = $(id);
   if (element.hasClass('point-left')) {
@@ -15,14 +17,28 @@ function rotate90(id) {
   }
 }
 
+// function loadSummaryTable(data) {
+//   $("#summaryTableBody").empty();
+// }
+
 function loadResultsTable(data) {
   $("#resultsTableBody").empty();
+  $("#reviewTableBody").empty();
+  var topics = {};
   for (var i = 0; i < data.length; i++) {
     var item          = data[i];
     var question      = item.question;
     var markedQ       = item.marked;
     var qNo           = i + 1;
     var correctAnswer = item.correct_answers[0];
+    var topic         = item['topic'];
+    var selectedAnswer;
+
+    if (item.selected_answer === undefined) {
+      selectedAnswer = "";
+    } else {
+      selectedAnswer = item.selected_answer;
+    }
 
     for (var j = 0; j < correct.length; j++) {
       if (correctAnswer === correct[j].correct_answers[0]) {
@@ -33,19 +49,29 @@ function loadResultsTable(data) {
       }
     }
 
-    // if (correct.includes(item)) {
-    //   var glyph = '"glyphicon glyphicon-ok-sign text-success"'
-    // } else {
-    //   var glyph = '"glyphicon glyphicon-remove-circle text-danger mr-10"'
-    // }
+    if (topics.hasOwnProperty(topic)) {
+      if (glyph === '"glyphicon glyphicon-ok-sign text-success mr-10"') {
+        topics[topic].correct ++;
+      } else {
+        topics[topic].incorrect ++;
+      }
+    } else {
+      if (glyph === '"glyphicon glyphicon-ok-sign text-success mr-10"') {
+        topics[topic] = {'correct': 1, 'incorrect': 0}
+      } else {
+        topics[topic] = {'correct': 0, 'incorrect': 1}
+      }
+    }
 
     var id = "'#triangle" + i + "'";
 
-    var entry = '<tr data-toggle="collapse" data-target="#accordion' + i + '" class="accordion-toggle" onclick="rotate90(' + id + ')">\
+    var resultsEntry =
+                  '\
+                  <tr data-toggle="collapse" data-target="#accordion' + i + '" class="accordion-toggle" onclick="rotate90(' + id + ')">\
                    <td class="text-center">' + qNo + '</td>\
-                   <td>Placeholder Topic</td>\
+                   <td>' + topic + '</td>\
                    <td>' + question + '</td>\
-                   <td>' + 'Placeholder Your Answer'  + '</td>\
+                   <td>' + selectedAnswer  + '</td>\
                    <td>' + correctAnswer + '</td>\
                    <td class="text-center"><span class=' + glyph + '"></span></td>\
                    <td><span id="triangle' + i + '" class="point-left glyphicon glyphicon-triangle-left"></span></td>\
@@ -53,12 +79,33 @@ function loadResultsTable(data) {
                  <tr>\
                    <td colspan="6" class="hiddenRow">\
                      <div id="accordion' + i + '" class="accordian-body collapse">\
-                       </p>Lorem ipsum this is a helpful solution for qustion 1! You know dis!! lorem ipsum lorem ipsum</p>\
+                       </p>Solutions coming soon.</p>\
                      </div>\
                    </td>\
-                 </tr>'
+                 </tr>\
+                 '
 
-    $("#resultsTableBody").append(entry);
+    $("#resultsTableBody").append(resultsEntry);
+  }
+
+  console.log(topics);
+
+  var topic_keys = Object.keys(topics)
+
+  for (var i = 0; i < topic_keys.length; i++) {
+    console.log(i);
+    var p_correct = Math.round(100 * topics[topic_keys[i]].correct / (topics[topic_keys[i]].correct + topics[topic_keys[i]].incorrect));
+    var summaryEntry =
+    '\
+    <tr>\
+      <td>' + Object.keys(topics)[i] + '</td>\
+      <td class="text-center">' + topics[topic_keys[i]].correct + '</td>\
+      <td class="text-center">' + (topics[topic_keys[i]].correct + topics[topic_keys[i]].incorrect) + '</td>\
+      <td class="text-center">' + p_correct + '</td>\
+     </tr>\
+     '
+
+     $("#summaryTableBody").append(summaryEntry);
   }
 
 }
@@ -69,17 +116,20 @@ $(document).ready(function() {
   incorrect    = JSON.parse(localStorage.getItem('incorrect'));
   skipped      = JSON.parse(localStorage.getItem('skipped'));
 
+  console.log(correct);
+
   var score = Math.round(correct.length / (questionData.length) * 100);
   const scoreString = score + '%';
 
-  const glyphElt = document.getElementById('glyph');
+  // Glyph element -- should rename
+  const glyphElement = document.getElementById('glyph');
 
   var header;
   switch(true) {
     case (score < 40):
       header = "Not quite. Keep studying!"
       glyph  = "glyphicon glyphicon-cloud-download"
-      glyphElt.setAttribute("style", "color:red;");
+      glyphElement.setAttribute("style", "color:red;");
       break;
     case (score < 60):
       header = "Still a good bit of work to do. Keep at it!"
@@ -88,17 +138,17 @@ $(document).ready(function() {
     case (score < 70):
       header = "Almost there! Keep going!"
       glyph  = "glyphicon glyphicon-wrench"
-      glyphElt.setAttribute("style", "color:yellow;");
+      glyphElement.setAttribute("style", "color:yellow;");
       break;
     case (score < 90):
       header = "Great job!"
       glyph  = "glyphicon glyphicon-cloud-upload"
-      glyphElt.setAttribute("style", "color:green;");
+      glyphElement.setAttribute("style", "color:green;");
       break;
     default:
       header = "Wow! Awesome!"
       glyph  = "glyphicon glyphicon-fire"
-      glyphElt.setAttribute("style", "color:orange;");
+      glyphElement.setAttribute("style", "color:orange;");
 }
   $('#header').text(header);
   $('#score').text(scoreString);
@@ -106,5 +156,27 @@ $(document).ready(function() {
 
   loadResultsTable(questionData);
 
+  console.log
+
   // console.log(Math.round(correct.length / (questionData.length) * 100) + '%');
+});
+
+$(document).ready( function() {
+  console.log('qdata: ' + JSON.stringify(questionData, null));
+  $.ajax({
+    type: 'POST',
+    // url: "https://2yroiqqvf8.execute-api.us-east-1.amazonaws.com/prod/post-quiz-results",
+    crossDomain: true,
+    contentType: 'application/json',
+    data: JSON.stringify(questionData),
+    dataType: 'json',
+    error: function(xhr, status, error) {
+      // TODO: - HANDLE ERRORS
+      // console.log(xhr)
+    },
+    success: function(result){
+      // TODO: - HANDLE SUCCESS
+      console.log('woohoo!')
+    }
+  });
 });
