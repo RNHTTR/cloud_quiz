@@ -17,10 +17,6 @@ function rotate90(id) {
   }
 }
 
-// function loadSummaryTable(data) {
-//   $("#summaryTableBody").empty();
-// }
-
 function loadResultsTable(data) {
   $("#resultsTableBody").empty();
   $("#reviewTableBody").empty();
@@ -156,9 +152,6 @@ $(document).ready(function() {
 
   loadResultsTable(questionData);
 
-  console.log
-
-  // console.log(Math.round(correct.length / (questionData.length) * 100) + '%');
 });
 
 $(document).ready( function() {

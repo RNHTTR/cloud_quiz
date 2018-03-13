@@ -17,7 +17,6 @@ var userPool = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserPool(poo
 
 
 function signUp() {
-  // var userPool = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
 
   var attributeList = [];
 
@@ -49,9 +48,6 @@ function signUp() {
           console.log('user name is ' + cognitoUser.getUsername());
           loggedIn(cognitoUser.getUsername());
   });
-  // console.log(poolData.UserPoolId);
-  // console.log(userPool);
-  // // checkForUser();
   return false;
 }
 
@@ -137,10 +133,7 @@ function checkForUser() {
                     alert(err);
                     return;
                 }
-                // console.log('user attributes result...');
-                // console.log(result);
                 for (i = 0; i < result.length; i++) {
-                    // console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
                     if (result[i].getName() === 'name') {
                       user_first_name = result[i].getValue();
                       $('#greeting').html('Hey ' + user_first_name);

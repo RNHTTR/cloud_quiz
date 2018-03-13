@@ -22,13 +22,8 @@ body { padding-top: 70px; }
 }
 
 .footer {
-  /*text-align: center;*/
   background-color: #f5f5f5;
   padding-bottom: 15px;
-}
-
-.menu {
-  /*display: none;*/
 }
 
 .vertical-center {
@@ -58,16 +53,6 @@ body { padding-top: 70px; }
 
 .quiz-responses {
   padding-left: 50px;
-}
-
-.next-question {
-  /*padding: 100px;*/
-  /*margin: 50px;*/
-}
-
-.pause {
-  /*padding-right: 150px;*/
-  /*margin: 50px;*/
 }
 
 .glyphicon.glyphicon-fire {
@@ -103,7 +88,6 @@ body { padding-top: 70px; }
 .glyphicon.glyphicon-signal {
     font-size: 200px;
     color: green;
-    /*display: block;*/
 }
 
 .hiddenRow {
@@ -120,13 +104,10 @@ body { padding-top: 70px; }
 }
 
 .borderless td {
-    /*border: none !important;*/
-    /*border-width: 1px !important;*/
     border-color: #f1f1f1 !important;
 }
 
 .result  {
-  /*text-align: center;*/
   margin-left: 15px;
 }
 
