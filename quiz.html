@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.177.0.min.js"></script>
+  <script src="static/js/aws-cognito-sdk.min.js"></script>
+  <script src="static/js/amazon-cognito-identity.min.js"></script>
+  <script src="static/js/config.js"></script>
+  <script src="static/js/cognito-auth.js"></script>
   <script src="static/js/main.js"></script>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -36,10 +41,17 @@
         </ul>
       </li> -->
     </ul>
-    <ul class="nav navbar-nav navbar-right mr-10">
-      <!-- <li><a href="#" data-toggle='modal' data-target='#logInModal'><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-      <li><a href="#" data-toggle='modal' data-target='#signUpModal'><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-      <li class=""><a href="#" data-toggle='' data-target=''><span class=" glyphicon glyphicon-option-horizontal"></span></a></li>
+    <ul class="nav navbar-nav navbar-right ">
+      <li id='logInButton'><a href="#" data-toggle='modal' data-target='#logInModal'><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+      <li id='signUpButton'><a href="#" data-toggle='modal' data-target='#signUpModal' class='mr-10'><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li class="dropdown">
+        <li id='menu'><a href="" data-toggle='dropdown' data-target='' class='dropdown-toggle'><span class=" glyphicon glyphicon-option-horizontal"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="">Edit Account</a></li>
+          <li><a href="">Sign Out</a></li>
+        </ul>
+        </li>
+      </li>
     </ul>
   </div>
 </nav>
@@ -105,25 +117,7 @@
            </tr>
          </thead>
          <tbody id='reviewTableBody'>
-           <!-- <tr>
-             <td class='text-center'>1</td>
-             <td class=''>What's the answer?</td>
-             <td class='text-center'><span class='glyphicon glyphicon-remove-circle text-danger'></span></td>
-             <td class='text-center'><span class='glyphicon glyphicon-alert text-warning'></span></td>
-            </tr>
-            <tr>
-              <td class='text-center'>2</td>
-              <td>What's the answer?</td>
-              <td class='text-center'><span class='glyphicon glyphicon-ok-sign text-success'></span></td>
-              <td class='text-center'></td>
-            </tr>
-            <tr>
-              <td class='text-center'>3</td>
-              <td>What's the answer to question 1?</td>
-              <td class='text-center'><span class='glyphicon glyphicon-ok-sign text-success'></span></td>
-              <td class='text-center'><span class='glyphicon glyphicon-alert text-warning'></span></td>
-            </tr> -->
-          </tbody>
+         </tbody>
         </table>
           <br>
           <div class='form-group' onclick='submitQuiz()'>

@@ -8,10 +8,12 @@
   <link rel="stylesheet" href="static/style/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.177.0.min.js"></script>
   <script src="static/js/aws-cognito-sdk.min.js"></script>
   <script src="static/js/amazon-cognito-identity.min.js"></script>
   <script src="static/js/config.js"></script>
   <script src="static/js/cognito-auth.js"></script>
+  <script src="static/js/index.js"></script>
 </head>
 
 <body>
@@ -23,8 +25,8 @@
     </div>
     <ul class="nav navbar-nav">
       <!-- <li class="active"><a href="#">Home</a></li> -->
-      <li class=""><a href="index.html">Home</a></li>
-      <li class=""><a href="dashboard.html">Dashboard</a></li>
+      <!-- <li class=""><a href="index.html">Home</a></li> -->
+      <li id="dashboard"><a href="dashboard.html">Dashboard</a></li>
       <!-- <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dashboard
         <span class="caret"></span></a>
@@ -35,10 +37,18 @@
         </ul>
       </li> -->
     </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" data-toggle='modal' data-target='#logInModal'><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-      <li><a href="#" data-toggle='modal' data-target='#signUpModal'><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <!-- <li class=""><a href="#" data-toggle='' data-target=''><span class=" glyphicon glyphicon-option-horizontal"></span></a></li> -->
+    <p id='greeting' class="navbar-text">Welcome to Cloud Quiz</p>
+    <ul class="nav navbar-nav navbar-right ">
+      <li id='logInButton'><a href="#" data-toggle='modal' data-target='#logInModal'><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+      <li id='signUpButton'><a href="#" data-toggle='modal' data-target='#signUpModal' class='mr-10'><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li class="dropdown">
+        <li id='menu'><a href="" data-toggle='dropdown' data-target='' class='dropdown-toggle'><span class=" glyphicon glyphicon-option-horizontal"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="">Edit Account</a></li>
+          <li><a href="">Sign Out</a></li>
+        </ul>
+        </li>
+      </li>
     </ul>
   </div>
 </nav>
@@ -221,6 +231,15 @@
             </select>
           </div>
           <div class='form-group'>
+            <select class="form-control" name='difficulty'>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3" selected>Difficulty (Default Level 3)</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class='form-group'>
             <select class="form-control" name='duration'>
               <option value="60">60 Seconds</option>
               <option value="70">70 Seconds</option>
@@ -270,6 +289,15 @@
         <p>Practice exams consist of 60 questions to be answered in 80 minutes.</p>
         <!-- <br> -->
         <form action='quiz.html' method='GET'>
+          <div class='form-group'>
+            <select class="form-control" name='difficulty'>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3" selected>Difficulty (Default Level 3)</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
           <h5>Select Topics</h5>
           <input type="hidden" name="duration" value="80" />
           <input type="hidden" name="numQ" value="60" />

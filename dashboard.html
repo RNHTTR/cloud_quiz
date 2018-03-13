@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="static/style/simple-sidebar.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.177.0.min.js"></script>
+  <script src="static/js/aws-cognito-sdk.min.js"></script>
+  <script src="static/js/amazon-cognito-identity.min.js"></script>
+  <script src="static/js/config.js"></script>
+  <script src="static/js/cognito-auth.js"></script>
   <script src="static/js/dashboard.js"></script>
 </head>
 
@@ -22,21 +27,18 @@
     <ul class="nav navbar-nav">
       <!-- <li class="active"><a href="#">Home</a></li> -->
       <li class=""><a href="index.html">Home</a></li>
-      <li class=""><a href="dashboard.html">Dashboard</a></li>
-      <!-- <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dashboard
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="dashboard.html">Results</a></li>
-          <li><a href="index.html">Create a Quiz</a></li>
-          <li><a href="dashboard.html">Ask</a></li>
-        </ul>
-      </li> -->
     </ul>
-    <ul class="nav navbar-nav navbar-right mr-10">
-      <!-- <li><a href="#" data-toggle='modal' data-target='#logInModal'><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-      <li><a href="#" data-toggle='modal' data-target='#signUpModal'><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-      <li class=""><a href="#" data-toggle='' data-target=''><span class=" glyphicon glyphicon-option-horizontal"></span></a></li>
+    <ul class="nav navbar-nav navbar-right ">
+      <li id='logInButton'><a href="#" data-toggle='modal' data-target='#logInModal'><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+      <li id='signUpButton'><a href="#" data-toggle='modal' data-target='#signUpModal' class='mr-10'><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li class="dropdown">
+        <li id='menu'><a href="" data-toggle='dropdown' data-target='' class='dropdown-toggle'><span class=" glyphicon glyphicon-option-horizontal"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="">Edit Account</a></li>
+          <li><a href="">Sign Out</a></li>
+        </ul>
+        </li>
+      </li>
     </ul>
   </div>
 </nav>
@@ -84,7 +86,7 @@ $("#menu-toggle").click(function(e) {
 <!-- JUMBOTRON -->
   <div class="container dashboard-jumbotron">
     <div class="jumbotron">
-      <h1>Dashboard</h1>
+      <h1 id='dashboard-greeting'>Dashboard</h1>
       <p>View your progress here. Increase your Altitude Score.
          As you answer more questions correctly, your <em>Altitude
          Score</em> will increase, but questions will become more difficult.
@@ -98,7 +100,7 @@ $("#menu-toggle").click(function(e) {
 <!-- MAIN -->
 <div class='container text-center'>
   <h1>Altitude Score</h1>
-  <h1 id='altscore'>4.2</h1>
+  <h1 id='altscore'>2.1</h1>
 </div>
 <br>
 <br>
